@@ -10,32 +10,39 @@ private:
     char board[10] = {'0','1','2','3','4','5','6','7','8','9'};
 
 public:
-    void get() {
-        mark = (player == 1) ? 'x' : '0';
-        while (status == -1) {
-            player = (player % 2 == 0) ? 2 : 1;
-            mark = (player == 1) ? 'x' : '0';
-            cout << "\n ENTER NUMBER for player: " << player;
-            cin >> input;
-            if (input < 1 || input > 9)
-                cout << "INVALID DATA";
+   void get() {
+    mark = (player == 1) ? 'X' : 'O';
+    while (status == -1) {
+        player = (player % 2 == 0) ? 2 : 1;
+        mark = (player == 1) ? 'X' : 'O';
+        cout << "\n ENTER NUMBER for player " << player << ": ";
+        cin >> input;
+        if (input < 1 || input > 9 || board[input] == 'X' || board[input] == 'O') {
+            cout << "INVALID MOVE. Try again.";
+            status = -1;  // Reset status to -1 for the same player to try again
+        }
+        else {
+            status = 1;
         }
     }
+}
 
     void getdata() {
         board[input] = mark;
-}
+    }
  
-       
-		void c2(){
-			 void result == checkwin();
+    void c2() {
+        int result = checkwin();
+        display();
         if (result == 1) {
-            cout << "Player " << player << " is the winner" << endl;
+            cout << "Player " << player << " is the winner!" << endl;
         }
         else if (result == 0) {
-            cout << "It's a draw" << endl;
+            cout << "It's a draw!" << endl;
         }
-        player++;
+        else {
+            player++;
+        }
     }
 
     void display() {
@@ -50,7 +57,7 @@ public:
         cout << "    |    | \n";
     }
 
-    void checkwin() {
+    int checkwin() {
         if (board[1] == board[2] && board[2] == board[3]) {
             return 1;
         }
@@ -78,24 +85,28 @@ public:
 
         int count = 0;
         for (int i = 1; i <= 9; i++) {
-            if (board[i] == 'x' || board[i] == '0') {
+            if (board[i] == 'X' || board[i] == 'O') {
                 count++;
             }
         }
         if (count == 9) {
-            return 0;
+            return 0; // Draw
         }
-        return -1;
+        return -1; // Continue the game
     }
 };
 
 int main() {
     game obj;
     cout << "\n -------TIC TAC TOE GAME-------\n";
-    obj.display();
-    obj.get();
-    obj.getdata();
-    obj.checkwin();
+    int turn = 1;
+    do {
+        obj.display();
+        obj.get();
+        obj.getdata();
+        obj.c2();
+        turn++;
+    } while (obj.checkwin() == -1);
     return 0;
 }
 
