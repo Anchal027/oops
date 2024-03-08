@@ -2,8 +2,10 @@
 #include<cstdlib>
 #include<ctime>
 using namespace std;
-int main(){
-	srand (time(0));
+class bca{
+	public:
+		void getdata(){
+		srand (time(0));
 	int secret_number=rand()%100+1;
 	int guess;
 	int attempts=0;
@@ -25,5 +27,9 @@ else if (guess < secret_number){
 }
 }
 while (guess!= secret_number);
-return 0;
+}
+};
+	int main(){
+		bca obj;
+		obj.getdata();
 }
