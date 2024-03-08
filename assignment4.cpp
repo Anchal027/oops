@@ -30,7 +30,6 @@ int main(){
 	int result4= obj.compute(1,2);
 	cout<<"Sum4= "<<result4<<endl;
 	int result5=obj.compute(2,3);
-	cout<<"Sum5= "<<result5<<endl;
-	
+	cout<<"Sum5= "<<result5<<endl;	
 	return 0;
 }

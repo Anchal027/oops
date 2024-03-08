@@ -4,11 +4,9 @@
 using namespace std;
 int main(){
 	srand (time(0));
-	
 	int secret_number=rand()%100+1;
 	int guess;
 	int attempts=0;
-	
 	cout<<"\n Welcome to the Number GUESSING GAME!";
 	cout<<"\n Guess the number between 1 to 100";
 	
@@ -28,5 +26,4 @@ else if (guess < secret_number){
 }
 while (guess!= secret_number);
 return 0;
-
 }
